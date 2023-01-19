@@ -50,3 +50,49 @@ if user[-2:] == "00":
 else:
 """
 
+## 117
+# print whether input is in list or not
+fruit = ['apple', 'grape', 'banana']
+user = input("fruit : ")
+if user in fruit:
+  print("Yes")
+else:
+  print("No")
+
+## 118
+# print whether input is in list or not
+warn_invest_list = ["MS", "Google", "Naver", "Kakao", "Samsung"]
+user = input('one company : ')
+if user in warn_invest_list:
+  print("warning!")
+else:
+  print("safe!")
+  
+## 119
+# print whether input is in dictionary key or not
+fruit = {
+  'spring' : 'strawberry',
+  'summer' : 'tomato',
+  'fall' : 'apple'
+}
+
+user = input('one input (key): ')
+if user in fruit:
+  print("Yes")
+else:
+  print("No")
+  
+## 120
+# print whether input is in dictionary value or not
+fruit = {
+  'spring' : 'strawberry',
+  'summer' : 'tomato',
+  'fall' : 'apple'
+}
+
+user = input('one input (value): ')
+# use values() method to target value
+if user in fruit.values():
+  print("Yes")
+else:
+  print("No")
