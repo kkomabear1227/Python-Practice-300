@@ -183,3 +183,199 @@ a.withdraw(700)
 print(a.money)
 a.withdraw(900)
 print(a.money)
+
+import random
+
+## 275
+"""
+add method display_info().
+"""
+class Account:
+  account_cnt = 0
+
+  def __init__(self, user_name, money):
+    self.bank_name = 'SC'
+    self.user_name = user_name
+
+    num1 = random.randint(0, 999)
+    num2 = random.randint(0, 99)
+    num3 = random.randint(0, 999999)
+
+    num1 = str(num1).zfill(3)
+    num2 = str(num2).zfill(2)
+    num3 = str(num3).zfill(6)
+
+    self.account_num = f"{num1}-{num2}-{num3}"
+
+    self.money = money
+    Account.account_cnt += 1
+
+  @classmethod
+  def get_account_num(cls):
+    print(cls.account_cnt)
+
+  def deposit(self, money):
+    if money > 0:
+      self.money += money
+
+  def withdraw(self, money):
+    if money <= self.money:
+      self.money -= money
+
+  def display_info(self):
+    print("bank name : {}".format(self.bank_name))
+    print(f"user name : {self.user_name}")
+    print("account number : {}".format(self.account_num))
+    print(f"left : {self.money:,}")
+
+a = Account('a', 1000000)
+a.display_info()
+
+## 277
+"""
+modify code so that when deposit 5 times, add 1% interest
+"""
+class Account:
+  account_cnt = 0
+
+  def __init__(self, user_name, money):
+    self.bank_name = 'SC'
+    self.user_name = user_name
+
+    num1 = random.randint(0, 999)
+    num2 = random.randint(0, 99)
+    num3 = random.randint(0, 999999)
+
+    num1 = str(num1).zfill(3)
+    num2 = str(num2).zfill(2)
+    num3 = str(num3).zfill(6)
+
+    self.account_num = f"{num1}-{num2}-{num3}"
+
+    self.money = money
+    self.deposit_count = 0
+    Account.account_cnt += 1
+
+  @classmethod
+  def get_account_num(cls):
+    print(cls.account_cnt)
+
+  def deposit(self, money):
+    if money > 0:
+      self.money += money
+      self.deposit_count += 1
+      if self.deposit_count % 5 == 0:
+        self.money *= 1.01
+      
+
+  def withdraw(self, money):
+    if money <= self.money:
+      self.money -= money
+
+  def display_info(self):
+    print("bank name : {}".format(self.bank_name))
+    print(f"user name : {self.user_name}")
+    print("account number : {}".format(self.account_num))
+    print(f"left : {self.money:,}")
+
+a = Account('a', 100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.display_info()
+
+## 278
+"""
+create 3 'Account' class instance, save in list
+"""
+list = []
+a = Account('a', 100)
+list.append(a)
+b = Account('b', 1000)
+list.append(b)
+c = Account('c', 10000)
+list.append(c)
+
+## 279
+"""
+traverse the list, display info who has more than 500 krw
+"""
+for account in list:
+  if account.money > 500:
+    account.display_info()
+
+## 280
+"""
+Update code that can record deposit/withdraw log
+create method deposit_history() and withdraw_history()
+"""
+class Account:
+  account_cnt = 0
+
+  def __init__(self, user_name, money):
+    self.bank_name = 'SC'
+    self.user_name = user_name
+
+    num1 = random.randint(0, 999)
+    num2 = random.randint(0, 99)
+    num3 = random.randint(0, 999999)
+
+    num1 = str(num1).zfill(3)
+    num2 = str(num2).zfill(2)
+    num3 = str(num3).zfill(6)
+
+    self.account_num = f"{num1}-{num2}-{num3}"
+
+    self.money = money
+    
+    self.deposit_count = 0
+
+    self.deposit_log = []
+    self.withdraw_log = []
+    
+    Account.account_cnt += 1
+
+  @classmethod
+  def get_account_num(cls):
+    print(cls.account_cnt)
+
+  def deposit(self, money):
+    if money > 0:
+      self.money += money
+      self.deposit_count += 1
+      self.deposit_log.append(f"{self.deposit_count} : {money} deposited")
+      if self.deposit_count % 5 == 0:
+        self.money *= 1.01
+        self.deposit_log.append(f"bonus!")
+      
+
+  def withdraw(self, money):
+    if money <= self.money:
+      self.money -= money
+      self.withdraw_log.append(f"{money} withdrawed")
+
+  def display_info(self):
+    print("bank name : {}".format(self.bank_name))
+    print(f"user name : {self.user_name}")
+    print("account number : {}".format(self.account_num))
+    print(f"left : {self.money:,}")
+
+  def deposit_history(self):
+    for log in self.deposit_log:
+      print(log)
+
+  def withdraw_history(self):
+    for log in self.withdraw_log:
+      print(log)
+
+a = Account('a', 100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.deposit(100)
+a.withdraw(400)
+a.deposit_history()
+a.withdraw_history()
